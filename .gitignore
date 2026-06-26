@@ -1,0 +1,18 @@
+# Visual Studio gizli klasörü
+.vs/
+
+# Derleme (Build) çıktıları
+[Bb]in/
+[Oo]bj/
+
+# Kullanıcıya özel ayar dosyaları
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Veritabanı dosyaları (Geliştirme aşamasındaki verilerin Git'e gitmemesi için)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
