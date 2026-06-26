@@ -35,5 +35,35 @@ namespace TechCareer.Scraper
             }
             Console.WriteLine("Veritabanı ve tablolar başarıyla hazırlandı.");
         }
+
+        public void IcerikEkle(string baslik, string kaynak, string kategori, string link)
+        {
+            using (var baglanti = new SqliteConnection(baglantiCumlesi))
+            {
+                baglanti.Open();
+
+                // OR IGNORE komutu, link daha önce eklendiyse hata vermeden geçmesini sağlar
+                string ekleSorgusu = @"
+            INSERT OR IGNORE INTO Icerikler (Baslik, Kaynak, Kategori, Link, Tarih)
+            VALUES (@baslik, @kaynak, @kategori, @link, @tarih);";
+
+                using (var komut = new SqliteCommand(ekleSorgusu, baglanti))
+                {
+                    // Parametreleri güvenli bir şekilde ekliyoruz (SQL Injection'ı önlemek için)
+                    komut.Parameters.AddWithValue("@baslik", baslik);
+                    komut.Parameters.AddWithValue("@kaynak", kaynak);
+                    komut.Parameters.AddWithValue("@kategori", kategori);
+                    komut.Parameters.AddWithValue("@link", link);
+                    komut.Parameters.AddWithValue("@tarih", DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
+
+                    int etkilenenSatir = komut.ExecuteNonQuery();
+
+                    if (etkilenenSatir > 0)
+                    {
+                        Console.WriteLine($"+ Yeni İçerik Eklendi: {baslik}");
+                    }
+                }
+            }
+        }
     }
 }

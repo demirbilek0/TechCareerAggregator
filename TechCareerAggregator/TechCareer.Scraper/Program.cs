@@ -9,3 +9,6 @@ dbYonetici.VeritabaniniHazirla();
 
 Console.WriteLine("İlk aşama tamamlandı. Kapatmak için bir tuşa basınız...");
 Console.ReadKey();
+
+EgitimScraper egitimBotu = new EgitimScraper(dbYonetici);
+egitimBotu.UludagDuyurulariCek();
