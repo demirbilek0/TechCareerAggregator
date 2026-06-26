@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="TechCareer.Scraper/TechCareer.Scraper.csproj" />
+  <Project Path="TechCareer.UI/TechCareer.UI.csproj" />
+</Solution>
